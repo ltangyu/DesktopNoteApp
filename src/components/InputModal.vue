@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { ModalAction } from '@/types/notes';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   action: ModalAction | null;
@@ -23,12 +26,12 @@ const title = computed(() => {
   const a = props.action;
   if (!a) return '';
   switch (a.kind) {
-    case 'addMain': return '新增主分類';
-    case 'renameMain': return `重新命名主分類「${a.main}」`;
-    case 'deleteMain': return `確定刪除主分類「${a.main}」？`;
-    case 'addSub': return `在「${a.main}」下新增子分類`;
-    case 'renameSub': return `重新命名子分類「${a.sub}」`;
-    case 'deleteSub': return `確定刪除子分類「${a.sub}」？`;
+    case 'addMain': return t('modal.addMain');
+    case 'renameMain': return t('modal.renameMain', { name: a.main });
+    case 'deleteMain': return t('modal.deleteMain', { name: a.main });
+    case 'addSub': return t('modal.addSub', { main: a.main });
+    case 'renameSub': return t('modal.renameSub', { name: a.sub });
+    case 'deleteSub': return t('modal.deleteSub', { name: a.sub });
   }
 });
 
@@ -36,7 +39,7 @@ const description = computed(() => {
   const a = props.action;
   if (!a) return '';
   if (a.kind === 'deleteMain' || a.kind === 'deleteSub') {
-    return '此操作無法復原。';
+    return t('modal.deleteWarning');
   }
   return '';
 });
@@ -84,13 +87,13 @@ function onKeydown(ev: KeyboardEvent) {
         @keydown="onKeydown"
       />
       <div class="actions">
-        <button class="btn ghost" @click="emit('cancel')">取消</button>
+        <button class="btn ghost" @click="emit('cancel')">{{ t('modal.cancel') }}</button>
         <button
           class="btn"
           :class="isDelete ? 'danger' : 'primary'"
           @click="onConfirm"
         >
-          {{ isDelete ? '刪除' : '確定' }}
+          {{ isDelete ? t('modal.delete') : t('modal.confirm') }}
         </button>
       </div>
     </div>

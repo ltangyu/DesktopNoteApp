@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useNotesStore } from '@/stores/notes';
 
+const { t } = useI18n();
 const store = useNotesStore();
 const local = ref('');
 const lastSyncedKey = ref('');
@@ -37,7 +39,7 @@ function onInput(ev: Event) {
     <textarea
       class="area"
       :value="local"
-      :placeholder="store.canEdit ? '開始輸入...' : '請選擇有效的主分類與子分類...'"
+      :placeholder="store.canEdit ? t('editor.placeholder') : t('editor.placeholderEmpty')"
       :disabled="!store.canEdit"
       @input="onInput"
     />

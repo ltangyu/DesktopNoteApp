@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 defineProps<{
   mains: string[];
@@ -27,14 +30,14 @@ function onContext(name: string, ev: MouseEvent) {
 
 <template>
   <div class="tabbar">
-    <button class="nav" title="向左捲動" @click="scrollBy(-200)">‹</button>
+    <button class="nav" :title="t('tabbar.scrollLeft')" @click="scrollBy(-200)">‹</button>
     <div ref="tabsRef" class="tabs">
       <button
         v-for="name in mains"
         :key="name"
         class="tab"
         :class="{ active: name === active }"
-        :title="`點擊切換　|　雙擊重命名　|　右鍵刪除`"
+        :title="t('tabbar.tabHint')"
         @click="emit('select', name)"
         @dblclick="emit('rename', name)"
         @contextmenu="onContext(name, $event)"
@@ -42,8 +45,8 @@ function onContext(name: string, ev: MouseEvent) {
         {{ name }}
       </button>
     </div>
-    <button class="nav" title="向右捲動" @click="scrollBy(200)">›</button>
-    <button class="add" title="新增主分類" @click="emit('add')">＋</button>
+    <button class="nav" :title="t('tabbar.scrollRight')" @click="scrollBy(200)">›</button>
+    <button class="add" :title="t('tabbar.addTooltip')" @click="emit('add')">＋</button>
   </div>
 </template>
 

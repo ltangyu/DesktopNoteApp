@@ -1,7 +1,17 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { setLocale, getLocale } from '@/i18n';
 
+const { t } = useI18n();
 const win = getCurrentWindow();
+
+const otherLocaleLabel = computed(() => (getLocale() === 'en' ? '中' : 'EN'));
+
+function toggleLocale() {
+  setLocale(getLocale() === 'en' ? 'zh-TW' : 'en');
+}
 
 async function onMinimize() {
   await win.minimize();
@@ -16,11 +26,14 @@ async function onClose() {
 
 <template>
   <header class="titlebar" data-tauri-drag-region>
-    <div class="title" data-tauri-drag-region>極簡記事本</div>
+    <div class="title" data-tauri-drag-region>{{ t('app.title') }}</div>
     <div class="controls">
-      <button class="ctrl" title="最小化" @click="onMinimize">─</button>
-      <button class="ctrl" title="最大化" @click="onMaximize">☐</button>
-      <button class="ctrl close" title="關閉" @click="onClose">✕</button>
+      <button class="ctrl lang" :title="t('window.languageToggle')" @click="toggleLocale">
+        {{ otherLocaleLabel }}
+      </button>
+      <button class="ctrl" :title="t('window.minimize')" @click="onMinimize">─</button>
+      <button class="ctrl" :title="t('window.maximize')" @click="onMaximize">☐</button>
+      <button class="ctrl close" :title="t('window.close')" @click="onClose">✕</button>
     </div>
   </header>
 </template>
@@ -63,5 +76,13 @@ async function onClose() {
 .ctrl.close:hover {
   background: var(--bg-danger-btn);
   color: var(--text-on-dark);
+}
+.ctrl.lang {
+  width: auto;
+  min-width: 28px;
+  padding: 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 </style>

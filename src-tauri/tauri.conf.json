@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "DesktopNoteApp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "identifier": "com.example.desktopnoteapp",
   "build": {
     "frontendDist": "../dist",
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "極簡記事本",
+        "title": "DesktopNoteApp",
         "width": 1000,
         "height": 700,
         "minWidth": 600,
@@ -35,7 +35,7 @@
     "icon": ["icons/icon.ico"],
     "copyright": "Copyright © 2026",
     "category": "Productivity",
-    "shortDescription": "極簡多分頁記事本",
-    "longDescription": "極簡風格的多分頁記事本，主分類 + 子分類兩層結構，自動保存。"
+    "shortDescription": "Minimalist multi-tab notepad",
+    "longDescription": "A minimalist multi-tab desktop notepad with two-level (categories -> subcategories) hierarchy and live auto-save."
   }
 }

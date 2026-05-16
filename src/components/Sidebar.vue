@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
 defineProps<{
   subs: string[];
   active: string;
@@ -21,8 +25,15 @@ function onContext(name: string, ev: MouseEvent) {
 <template>
   <aside class="sidebar">
     <div class="header">
-      <span class="label">子分類</span>
-      <button class="add" :disabled="!hasMain" title="新增子分類" @click="emit('add')">＋</button>
+      <span class="label">{{ t('sidebar.label') }}</span>
+      <button
+        class="add"
+        :disabled="!hasMain"
+        :title="t('sidebar.addTooltip')"
+        @click="emit('add')"
+      >
+        ＋
+      </button>
     </div>
     <div class="list">
       <button
@@ -30,15 +41,15 @@ function onContext(name: string, ev: MouseEvent) {
         :key="name"
         class="sub"
         :class="{ active: name === active }"
-        :title="`點擊切換　|　雙擊重命名　|　右鍵刪除`"
+        :title="t('sidebar.subHint')"
         @click="emit('select', name)"
         @dblclick="emit('rename', name)"
         @contextmenu="onContext(name, $event)"
       >
         {{ name }}
       </button>
-      <p v-if="hasMain && subs.length === 0" class="empty">尚無子分類</p>
-      <p v-if="!hasMain" class="empty">請先選擇主分類</p>
+      <p v-if="hasMain && subs.length === 0" class="empty">{{ t('sidebar.emptyNoSub') }}</p>
+      <p v-if="!hasMain" class="empty">{{ t('sidebar.emptyNoMain') }}</p>
     </div>
   </aside>
 </template>
