@@ -6,18 +6,9 @@ src-tauri/gen/
 .DS_Store
 .vite/
 
-# 舊 Electron 版的衍生產物（保留 source，不要 lock/build artifacts）
-_legacy/node_modules/
-_legacy/dist-electron-old/
-
 # IDE / OS
 .vscode/
 .idea/
 Thumbs.db
 
-# 本地暫存
-.tauri-build.log
-.tauri-dev.log
-.cargo-check.log
-.install.log
 
