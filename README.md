@@ -8,6 +8,8 @@
 [![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
+![DesktopNoteApp screenshot](docs/screenshots/main.png)
+
 ---
 
 ## 特色 / Features
