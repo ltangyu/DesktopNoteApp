@@ -1,0 +1,67 @@
+<!--index.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>極簡記事本</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';" />
+
+<body>
+    <div id="window-controls">
+        <button id="min-btn">─</button>
+        <button id="max-btn">☐</button>
+        <button id="close-btn">✕</button>
+    </div>
+    <div id="app">
+        <!-- 加在 #app 裡的最上方 -->
+        <div class="notepad-header">
+        </div>
+
+        <!-- 頂部主分頁 -->
+        <div id="tab-scroll-wrapper">
+            <div id="tab-bar" class="tab-bar">
+                <div class="tab active">Tab 1</div>
+                <button id="add-tab" class="add-tab-btn">＋</button>
+            </div>
+        </div>
+
+        <!-- 主內容區：左側子分頁 + 右側內容 -->
+        <div class="main-container">
+            <!-- 左側子分類欄 -->
+            <div id="sidebar" class="sidebar">
+                <div class="sidebar-header">
+                    <button id="add-sub-tab" title="新增子分頁" class="add-sub-btn">＋</button>
+                </div>
+                <div id="sub-tabs" class="sub-tabs">
+                    <!-- 子分類動態加入 -->
+                </div>
+            </div>
+
+            <!-- 筆記編輯區 -->
+            <div class="content-area">
+                <textarea id="note-area" class="note-area" placeholder="請選擇有效的主分類與子分類..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- 輸入彈窗 -->
+    <div id="input-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-title"></h2>
+            <input type="text" id="modal-input" />
+            <div class="modal-buttons">
+                <button id="modal-confirm">確定</button>
+                <button id="modal-cancel">取消</button>
+                <button id="modal-delete">刪除</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>
