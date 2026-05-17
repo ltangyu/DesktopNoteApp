@@ -5,14 +5,10 @@
   --radius-sm: 4px;
 
   /* 顏色 */
-  --bg-block: #ffffff;                          /* content / active tab / active sub 實心白閱讀清楚 */
-  --bg-shell: rgba(255, 255, 255, 0.4);         /* 視窗本體：40% 半透明白統一毛玻璃 */
-  --bg-sidebar: transparent;                    /* sidebar/tabbar 透明，由 shell 0.4 統一覆蓋 */
-  --bg-titlebar: transparent;                   /* 標題列透明，由 shell 0.4 統一覆蓋 */
-  --glass-blur: 24px;
-  /* 設計：ring 完全透明（顯示原桌面 + 陰影漸隱），
-     .app-shell 40% 半透明白統一覆蓋整個視窗本體（標題列/tabbar/sidebar 一致 40% 毛玻璃），
-     只有 content area / active tab / active sub 是實心白方便閱讀 */
+  --bg-block: #ffffff;             /* 白底區塊（content / active tab / active sub） */
+  --bg-shell: #fafafa;             /* 視窗外殼浮卡 = 與 titlebar / tabbar / sidebar 同色 */
+  --bg-sidebar: #fafafa;           /* sidebar / tabbar 灰底 */
+  --bg-titlebar: #fafafa;          /* 標題列同 sidebar 色 */
   --bg-hover: rgba(0, 0, 0, 0.04);
   --bg-active: rgba(0, 0, 0, 0.06);
   --bg-overlay: rgba(0, 0, 0, 0.35);
@@ -29,13 +25,15 @@
   --border-medium: rgba(0, 0, 0, 0.10);
   --border-focus: #000000;
 
-  /* 陰影 — 4 層深濃，在 32px padding 內漸隱
-     最大 (12+22-8)=26px ≤ 32px buffer 6px，opacity 0.40 給明顯立體感 */
+  /* 陰影 — 必須完全在 --shell-padding 範圍內漸隱，否則被 viewport 截掉成銳利分界線。
+     box-shadow Gaussian tail ≈ blur×1.6，所以 (offset + blur - spread) × 1.6 ≤ padding 才安全。
+     當前 padding 32：最大 (6 + 12 - 2) × 1.6 = 25.6px，留 6px 緩衝。
+     opacity 強化到 0.34 補強對比感（範圍小但深濃）。 */
   --shadow-shell:
-    0 1px 3px rgba(0, 0, 0, 0.16),
-    0 4px 8px rgba(0, 0, 0, 0.24),
-    0 8px 16px -2px rgba(0, 0, 0, 0.32),
-    0 12px 22px -8px rgba(0, 0, 0, 0.40);
+    inset 0 0 0 1px #fafafa,
+    0 1px 2px rgba(0, 0, 0, 0.18),
+    0 3px 6px rgba(0, 0, 0, 0.26),
+    0 6px 12px -2px rgba(0, 0, 0, 0.34);
   --shadow-modal: 0 4px 24px rgba(0, 0, 0, 0.18);
 
   /* 標籤凸出陰影（active / hover 用） — 強化對比 */
@@ -52,7 +50,7 @@
   --font-sans: 'Inter', 'Microsoft JhengHei', '源泉圓體丹', 'PingFang TC', sans-serif;
 
   /* 尺寸 */
-  --shell-padding: 32px;     /* 回原本尺寸；shadow ≤26px 安全在內 */
+  --shell-padding: 32px;
   --titlebar-h: 36px;
   --tabbar-h: 40px;
   --sidebar-w: 160px;
