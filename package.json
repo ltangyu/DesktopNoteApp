@@ -1,6 +1,6 @@
 {
   "name": "desktop-note-app",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "description": "極簡多分頁記事本（Tauri v2 + Vue 3 + TypeScript）",

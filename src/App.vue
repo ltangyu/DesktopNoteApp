@@ -82,6 +82,8 @@ async function onConfirm(value: string) {
   flex-direction: column;
   height: 100%;
   background: var(--bg-shell);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-shell);
   overflow: hidden;

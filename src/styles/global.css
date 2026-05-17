@@ -16,6 +16,8 @@ body {
 #app {
   height: 100vh;
   padding: var(--shell-padding);
+  /* 完全透明：padding ring 顯示 OS Aero blur 桌面 + box-shadow 漸隱
+     視覺 = 卡片陰影自然漸隱在模糊桌面上，看得到桌面又有陰影感 */
   background: transparent;
   font-family: var(--font-sans);
   font-size: 12px;

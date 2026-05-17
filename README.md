@@ -18,6 +18,7 @@
 - **兩層分類結構**：上方主分類 tab + 左側子分類 sidebar + 右側內文編輯區
 - **即時自動保存**：300 ms debounce，內容變更自動寫入磁碟，atomic rename 防壞檔
 - **雙語介面**：預設英文，點標題列右上 **中** / **EN** 按鈕一鍵切換繁體中文，選擇記憶在 `localStorage`
+- **毛玻璃外殼**：視窗本體 40% 半透明白覆蓋桌面，外圍透明 + 4 層深陰影 = 卡片浮在桌面上
 - **視覺**：透明畫布上的圓角浮卡，4 層柔和陰影；統一 10 px 圓角、Inter + Microsoft JhengHei 字型
 - **動態標籤**：選中的 tab 上方圓角凸出、選中的子分類左方圓角凸出，無縫連接到內文區
 - **輕量**：Installer 約 1 MB，執行記憶體約 30 MB，per-user 安裝免管理員權限
@@ -26,6 +27,7 @@
 - **Two-level hierarchy**: top main-category tabs + left sub-category sidebar + right content editor
 - **Live auto-save**: 300 ms debounce, changes are written to disk via atomic rename — safe against power loss
 - **Bilingual UI**: English by default; click the **中** / **EN** toggle at the top-right of the title bar to switch to Traditional Chinese. The choice is remembered in `localStorage`
+- **Frosted-glass shell**: window body is 40 % translucent white over the desktop; the transparent 32 px padding ring with a 4-layer deep shadow makes the card visibly float
 - **Visuals**: rounded floating card on a transparent canvas, 4-layer soft shadow; unified 10 px radius, Inter + Microsoft JhengHei typography
 - **Dynamic tabs**: active tab pops out with rounded top corners, active sub-category pops out with rounded left corners, both seamlessly connecting to the content area
 - **Lightweight**: ~1 MB installer, ~30 MB RAM at runtime, per-user install with no admin required
