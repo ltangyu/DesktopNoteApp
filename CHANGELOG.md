@@ -3,6 +3,20 @@
 All notable changes to DesktopNoteApp are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com).
 
+## [0.3.2] — 2026-05-20
+
+### Added
+- **macOS + Linux artifacts** via GitHub Actions `tauri-action` matrix workflow
+  - `DesktopNoteApp_0.3.2_universal.dmg` — macOS universal (Intel + Apple Silicon)
+  - `DesktopNoteApp_0.3.2_x64.AppImage` + `.deb` — Linux x86_64
+  - `DesktopNoteApp_0.3.2_x64-setup.exe` — Windows installer (NSIS)
+- `.github/workflows/release.yml` — push any `v*` tag to trigger full cross-platform release
+
+### Notes
+- Rust code already cross-platform: `dirs::data_dir()` resolves to `~/Library/Application Support/desktop-note-app/` on macOS and `~/.local/share/desktop-note-app/` on Linux
+- Portable mode (`portable.txt` flag) works identically on all three OSes
+- Bilingual UI carried from v0.3.1; visual identical across platforms (native window chrome / CSS scrollbar fallbacks differ slightly per OS)
+
 ## [0.3.1] — 2026-05-20
 
 ### Added
