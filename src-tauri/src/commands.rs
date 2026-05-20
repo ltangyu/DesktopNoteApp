@@ -5,6 +5,15 @@ use std::path::PathBuf;
 pub type Notes = BTreeMap<String, BTreeMap<String, String>>;
 
 fn data_path() -> Result<PathBuf, String> {
+    // Portable 模式：exe 同目錄若有 `portable.txt` flag，data 寫在同目錄（真綠色）
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(dir) = exe.parent() {
+            if dir.join("portable.txt").exists() {
+                return Ok(dir.join("data.json"));
+            }
+        }
+    }
+    // 標準模式：%APPDATA%\desktop-note-app\data.json
     let base = dirs::data_dir().ok_or_else(|| "找不到 %APPDATA% 路徑".to_string())?;
     let dir = base.join("desktop-note-app");
     fs::create_dir_all(&dir).map_err(|e| e.to_string())?;

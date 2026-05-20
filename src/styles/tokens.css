@@ -1,57 +1,101 @@
+/* ii Design Language — Design Tokens
+ * Source of truth: D:\Desktop\AI\visual-style-docs\主要視覺設計.md
+ * 對齊 SSOT v1.0 (2026-05-18)
+ */
+
 :root {
-  /* 圓角 — ii NOTE 主元件 10px、視窗外殼 12px、小元件 4px */
-  --radius: 10px;        /* tab / sub-tab / modal / textarea */
-  --radius-lg: 12px;     /* 視窗外殼浮卡 */
-  --radius-sm: 4px;
+  /* ─── Radius ─────────────────────────────────────── */
+  --radius-sm:    4px;
+  --radius:      10px;        /* tab / sub-tab / button / input / modal */
+  --radius-lg:   12px;        /* 視窗外殼浮卡 */
+  --radius-pill: 9999px;
 
-  /* 顏色 */
-  --bg-block: #ffffff;             /* 白底區塊（content / active tab / active sub） */
-  --bg-shell: #fafafa;             /* 視窗外殼浮卡 = 與 titlebar / tabbar / sidebar 同色 */
-  --bg-sidebar: #fafafa;           /* sidebar / tabbar 灰底 */
-  --bg-titlebar: #fafafa;          /* 標題列同 sidebar 色 */
-  --bg-hover: rgba(0, 0, 0, 0.04);
-  --bg-active: rgba(0, 0, 0, 0.06);
-  --bg-overlay: rgba(0, 0, 0, 0.35);
-  --bg-primary-btn: #000000;
-  --bg-danger-btn: #e81123;
+  /* ─── Color — mono only ──────────────────────────── */
+  --bg-block:        #ffffff;
+  --bg-shell:        #fafafa;
+  --bg-sidebar:      #fafafa;
+  --bg-titlebar:     #fafafa;
+  --bg-surface:      #f8f9fa;
+  --bg-surface-2:    #f1f3f5;
+  --bg-surface-3:    #fafafa;
+  --bg-hover:        rgba(0, 0, 0, 0.04);
+  --bg-active:       rgba(0, 0, 0, 0.06);
+  --bg-overlay:      rgba(0, 0, 0, 0.35);
+  --bg-primary-btn:        #000000;
+  --bg-primary-btn-hover:  #1a1a1a;
+  --bg-danger-btn:         #e81123;
 
-  --text-primary: #000000;
+  --text-primary:   #000000;
   --text-secondary: #6b6b6b;
-  --text-muted: #9c9c9c;
-  --text-on-dark: #ffffff;
+  --text-muted:     #9c9c9c;
+  --text-dim:       #aaaaaa;
+  --text-on-dark:   #ffffff;
 
-  /* 邊框 */
   --border-subtle: rgba(0, 0, 0, 0.08);
   --border-medium: rgba(0, 0, 0, 0.10);
-  --border-focus: #000000;
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --border-focus:  #000000;
 
-  /* 陰影 — 必須完全在 --shell-padding 範圍內漸隱，否則被 viewport 截掉成銳利分界線。
-     box-shadow Gaussian tail ≈ blur×1.6，所以 (offset + blur - spread) × 1.6 ≤ padding 才安全。
-     當前 padding 32：最大 (6 + 12 - 2) × 1.6 = 25.6px，留 6px 緩衝。
-     opacity 強化到 0.34 補強對比感（範圍小但深濃）。 */
-  --shadow-shell:
-    inset 0 0 0 1px #fafafa,
-    0 1px 2px rgba(0, 0, 0, 0.18),
-    0 3px 6px rgba(0, 0, 0, 0.26),
-    0 6px 12px -2px rgba(0, 0, 0, 0.34);
+  /* ─── Status dot — R11 唯一彩色例外 ────────────────── */
+  --status-ok:   #00ff41;
+  --status-warn: #facc15;
+  --status-err:  #e53935;
+  --status-idle: #c8c6c6;
+
+  /* ─── Typography ─────────────────────────────────── */
+  --font-sans: 'Inter', 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Space Grotesk', 'JetBrains Mono', 'Cascadia Code',
+               'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+  --text-micro: 9px;
+  --text-xs:    10px;
+  --text-sm:    11px;
+  --text-base:  12px;       /* DesktopNoteApp 全域用此（無階梯） */
+  --text-md:    13px;
+  --text-lg:    14px;
+  --text-xl:    16px;
+  --letter-uppercase: 0.08em;
+
+  /* ─── Spacing — 4px scale ────────────────────────── */
+  --gap-1: 4px;
+  --gap-2: 8px;
+  --gap-3: 12px;
+  --gap-4: 16px;
+  --gap-5: 20px;
+  --gap-6: 24px;
+  --gap-7: 30px;
+
+  --shell-padding: 32px;     /* DesktopNoteApp 標準 */
+  --titlebar-h:    36px;
+  --tabbar-h:      40px;
+  --sidebar-w:    160px;
+
+  /* ─── Shadow ─────────────────────────────────────── */
+  --shadow-soft:  0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-card:  0 1px 4px rgba(0, 0, 0, 0.06);
   --shadow-modal: 0 4px 24px rgba(0, 0, 0, 0.18);
 
-  /* 標籤凸出陰影（active / hover 用） — 強化對比 */
+  /* 視窗外殼 4 層浮卡陰影：
+     (offset + blur − spread) × 1.6 ≤ shell-padding(32) 安全公式
+     L1: (1+2)×1.6=4.8 · L2: (3+6)×1.6=14.4 · L3: (6+12+2)×1.6=32.0 */
+  --shadow-shell:
+    inset 0 0 0 1px #fafafa,
+    0 1px 2px      rgba(0, 0, 0, 0.18),
+    0 3px 6px      rgba(0, 0, 0, 0.26),
+    0 6px 12px -2px rgba(0, 0, 0, 0.34);
+
+  /* Tab / Sub-tab 凸出陰影（DesktopNoteApp 專用） */
   --shadow-tab-active: 0 -4px 12px rgba(0, 0, 0, 0.16);
-  --shadow-tab-hover: 0 -2px 8px rgba(0, 0, 0, 0.10);
+  --shadow-tab-hover:  0 -2px 8px  rgba(0, 0, 0, 0.10);
   --shadow-sub-active: -4px 0 12px rgba(0, 0, 0, 0.16);
-  --shadow-sub-hover: -2px 0 8px rgba(0, 0, 0, 0.10);
+  --shadow-sub-hover:  -2px 0 8px  rgba(0, 0, 0, 0.10);
 
-  /* 過渡 */
-  --t-fast: 0.15s ease;
-  --t-base: 0.15s ease;
+  /* ─── Glass ──────────────────────────────────────── */
+  --glass-bg:   rgba(255, 255, 255, 0.78);
+  --glass-blur: blur(20px);
 
-  /* 字型 */
-  --font-sans: 'Inter', 'Microsoft JhengHei', '源泉圓體丹', 'PingFang TC', sans-serif;
-
-  /* 尺寸 */
-  --shell-padding: 32px;
-  --titlebar-h: 36px;
-  --tabbar-h: 40px;
-  --sidebar-w: 160px;
+  /* ─── Transition ─────────────────────────────────── */
+  --t-fast: 0.15s ease;     /* hover / focus / color */
+  --t-base: 0.20s ease;     /* layout / size */
 }

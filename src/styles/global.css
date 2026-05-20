@@ -18,10 +18,11 @@ body {
   padding: var(--shell-padding);
   background: transparent;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--text-base);          /* SSOT: 12px */
   color: var(--text-primary);
   user-select: none;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 textarea,
